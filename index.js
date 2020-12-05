@@ -1,6 +1,11 @@
-const nameInput = document.getElementById('name')
+function onLoad() {
+  const loggedInUser = sessionStorage.getItem("loggedInUserName");
+  if (loggedInUser) window.location.href = "shopping-list.html";
+}
+
+const nameInput = document.getElementById("name");
 nameInput.oninput = handleInput;
-let inputValue = ''
+let inputValue = "";
 
 // handleChange for name input
 function handleInput(e) {
@@ -9,6 +14,8 @@ function handleInput(e) {
 
 // submit name to redirect to shopping list
 function submitName() {
+  if (!inputValue) return null;
+
   // get list of users from localStorage
   const users = JSON.parse(localStorage.getItem("users"));
 
@@ -18,14 +25,16 @@ function submitName() {
     localStorage.setItem("users", JSON.stringify(users));
   } else {
     const existingUser = users.find(({ name }) => name === inputValue);
-    console.log(existingUser, users);
+    // user is not present add to users list
     if (!existingUser) {
-        users.push({ name: inputValue, list: [] });
-        localStorage.setItem("users", JSON.stringify(users))
+      users.push({ name: inputValue, list: [] });
+      localStorage.setItem("users", JSON.stringify(users));
     }
   }
 
-  nameInput.value=""
+  sessionStorage.setItem("loggedInUserName", inputValue);
+
+  nameInput.value = "";
 
   window.location.href = "shopping-list.html";
 }
