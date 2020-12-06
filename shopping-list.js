@@ -7,6 +7,17 @@ function redirectToHome() {
   window.location.href = "index.html";
 }
 
+function displayRemainingItems() {
+  const itemRemaining = document.getElementById("items-remaining");
+  const existingList = getShoppingList();
+  itemRemaining.textContent =
+    existingList.length < 5
+      ? `You can add ${5 - existingList.length} more items`
+      : "You cannot add items further";
+  document.getElementById("add-list-button").disabled =
+    existingList.length >= 5;
+}
+
 function getLoggedInUser() {
   return sessionStorage.getItem("loggedInUserName");
 }
@@ -24,6 +35,7 @@ function addToShoppingList(item) {
   displayItem(item, id);
   existingList.push({ id, item });
   localStorage.setItem(loggedInUser, JSON.stringify(existingList));
+  displayRemainingItems();
 }
 
 function getIndexById(arr, id) {
@@ -33,11 +45,12 @@ function getIndexById(arr, id) {
 function saveItem(value, id) {
   const loggedInUser = getLoggedInUser();
   const existingList = getShoppingList();
-  const updatedList = existingList.map((item) => {
-    if (item.id === id) return { ...item, value };
+  const updatedList = existingList.map((i) => {
+    if (i.id === id) return { ...i, item: value };
     return item;
   });
   localStorage.setItem(loggedInUser, JSON.stringify(updatedList));
+  displayRemainingItems();
 }
 
 function deleteItem(id) {
@@ -48,13 +61,11 @@ function deleteItem(id) {
     existingList.splice(index, 1);
   }
   localStorage.setItem(loggedInUser, JSON.stringify(existingList));
+  displayRemainingItems();
 }
 
 function displayItem(value, id) {
   const div = document.createElement("div");
-  div.ondblclick = () => {
-    input.disabled = false;
-  };
   div.id = `input-${id}`;
 
   const input = document.createElement("input");
@@ -79,12 +90,18 @@ function displayItem(value, id) {
     editButton.textContent = isEditable ? "Done" : "Edit";
   };
 
+  div.ondblclick = () => {
+    isEditable = !isEditable;
+    input.disabled = false;
+    editButton.textContent = isEditable ? "Done" : "Edit";
+  };
+
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
   deleteButton.onclick = () => {
     document.getElementById(`input-${id}`).remove();
     deleteItem(id);
-  }
+  };
 
   div.appendChild(input);
   div.appendChild(editButton);
@@ -95,8 +112,9 @@ function displayItem(value, id) {
 function onLoad() {
   const shoppingList = getShoppingList();
   if (shoppingList) {
-    shoppingList.map((listItem, i) => displayItem(listItem.value, listItem.id));
+    shoppingList.map((listItem, i) => displayItem(listItem.item, listItem.id));
   }
+  displayRemainingItems();
 }
 
 function validateFormOnSubmit(formData) {
