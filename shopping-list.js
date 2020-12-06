@@ -7,7 +7,25 @@ function redirectToHome() {
   window.location.href = "index.html";
 }
 
-function addNewElement(value) {
+function getLoggedInUser() {
+  return sessionStorage.getItem("loggedInUserName");
+}
+
+function getShoppingList() {
+  const loggedInUser = getLoggedInUser();
+  if (!loggedInUser) redirectToHome();
+  return JSON.parse(localStorage.getItem(loggedInUser));
+}
+
+function addToShoppingList(item) {
+  displayItem(item)
+  const loggedInUser = getLoggedInUser();
+  const existingList = getShoppingList() || [];
+  existingList.push(item);
+  localStorage.setItem(loggedInUser, JSON.stringify(existingList))
+}
+
+function displayItem(value) {
   const li = document.createElement("li");
   const inputValue = value;
   const textNode = document.createTextNode(inputValue);
@@ -16,20 +34,12 @@ function addNewElement(value) {
 }
 
 function onLoad() {
-  // check if user is logged in.
-  const loggedInUser = sessionStorage.getItem("loggedInUserName");
-  if (!loggedInUser) redirectToHome();
-
-  const users = JSON.parse(localStorage.getItem("users"));
-  const user = users.find(({ name }) => name === loggedInUser);
-  // if user is not present redirect to home
-  if (!user) redirectToHome();
-
-  if (users.list.length) {
-    users.list.map((listItem) => addNewElement(listItem));
+  const shoppingList = getShoppingList();
+  if (shoppingList) {
+    shoppingList.map((listItem) => displayItem(listItem));
   }
 }
 
 function validateFormOnSubmit(formData) {
-  addNewElement(formData.item.value);
+  addToShoppingList(formData.item.value);
 }
