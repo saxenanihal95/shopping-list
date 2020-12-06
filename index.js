@@ -1,6 +1,10 @@
+function redirectToShoppingList() {
+  window.location.href = "shopping-list.html";
+}
+
 function onLoad() {
   const loggedInUser = sessionStorage.getItem("loggedInUserName");
-  if (loggedInUser) window.location.href = "shopping-list.html";
+  if (loggedInUser) redirectToShoppingList();
 }
 
 const nameInput = document.getElementById("name");
@@ -36,5 +40,5 @@ function submitName() {
 
   nameInput.value = "";
 
-  window.location.href = "shopping-list.html";
+  redirectToShoppingList();
 }
