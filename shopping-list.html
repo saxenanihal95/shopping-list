@@ -4,18 +4,20 @@
 <head>
     <title>Shopping List</title>
     <link rel="stylesheet" href="shopping-list.css">
+    <link rel="stylesheet" href="common.css">
 </head>
 
 <body onload="onLoad()">
     <div class="container">
         <div class="heading-container">
-            <h1 style="flex: 1">Shopping List</h1>
+            <h1 style="flex: 1" id="user-name"></h1>
             <button onclick="logout()" class="btn">Logout</button>
         </div>
+        <h2>Your Shopping List: </h2>
         <div class="list-containter">
             <form action="javascript:;" onsubmit="return validateFormOnSubmit(this);" id="shopping-list-form">
                 <div class="form-container">
-                    <textarea id="item" name="item" rows="4" cols="50" placeholder="Enter new Item"></textarea>
+                    <textarea id="item" name="item" rows="4" cols="50" placeholder="Enter new item in the shopping list"></textarea>
                     <div id="items-remaining"></div>
                     <input type="submit" id="add-list-button" style="width: 100px;align-self: center;" class="btn"/>
                 </div>

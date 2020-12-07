@@ -70,6 +70,7 @@ function displayItem(value, id) {
   div.className = 'list-item';
 
   const input = document.createElement("input");
+  input.className = 'inpt'
   input.value = value;
   input.disabled = true;
   input.oninput = handleInput;
@@ -118,6 +119,7 @@ function onLoad() {
     shoppingList.map((listItem, i) => displayItem(listItem.item, listItem.id));
   }
   displayRemainingItems();
+  document.getElementById("user-name").textContent = `Welcome ${getLoggedInUser()}`
 }
 
 function validateFormOnSubmit(formData) {

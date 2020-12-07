@@ -3,15 +3,20 @@
 
 <head>
     <title>Shopping List</title>
-    
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
 </head>
 
 <body onload="onLoad()">
-    <h1>Welcome</h1>
-    <h2>Please enter your name below to access the shopping list</h2>
-    <input placeholder="Name" id="name" />
-    <button onclick="submitName()">Submit</button>
-    <script type="text/javascript" src="index.js"> </script>
+    <div class="container">
+        <h1>Welcome</h1>
+        <h2>Please enter your name below to access the shopping list</h2>
+        <div class="form-container">
+            <input placeholder="Name" id="name" class="inpt name-input" />
+            <button onclick="submitName()" class="btn">Submit</button>
+        </div>
+        <script type="text/javascript" src="index.js"> </script>
+    </div>
 </body>
 
 </html>

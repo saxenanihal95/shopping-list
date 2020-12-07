@@ -3,10 +3,6 @@
   align-items: center;
 }
 
-.container {
-  margin: auto 300px;
-}
-
 .list-containter {
   display: flex;
   justify-content: center;
@@ -41,29 +37,9 @@
 }
 
 .list-item button {
-  /* height: 20px; */
   width: 150px;
 }
 
 .list-item .edit-button {
   margin: 0 10px;
-}
-
-.list-item input {
-  width: 100%;
-  padding: 12px 20px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  resize: none;
-}
-
-.btn {
-  background-color: skyblue;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  text-decoration: none;
 }
