@@ -3,18 +3,27 @@
 
 <head>
     <title>Shopping List</title>
+    <link rel="stylesheet" href="shopping-list.css">
 </head>
 
 <body onload="onLoad()">
-    <h1>Shopping List</h1>
-    <button onclick="logout()">Logout</button>
+    <div class="container">
+        <div class="heading-container">
+            <h1 style="flex: 1">Shopping List</h1>
+            <button onclick="logout()" class="btn">Logout</button>
+        </div>
+        <div class="list-containter">
+            <form action="javascript:;" onsubmit="return validateFormOnSubmit(this);" id="shopping-list-form">
+                <div class="form-container">
+                    <textarea id="item" name="item" rows="4" cols="50" placeholder="Enter new Item"></textarea>
+                    <div id="items-remaining"></div>
+                    <input type="submit" id="add-list-button" style="width: 100px;align-self: center;" class="btn"/>
+                </div>
+            </form>
+            <div id="shopping-list"></div>
+        </div>
+    </div>
     <script type="text/javascript" src="shopping-list.js"> </script>
-    <div id="items-remaining"></div>
-    <form action="javascript:;" onsubmit="return validateFormOnSubmit(this);" id="shopping-list-form">
-        <textarea id="item" name="item" rows="4" cols="50" placeholder="Enter new Item" ></textarea>
-        <input type="submit" id="add-list-button"/>
-    </form> 
-    <div id="shopping-list"></div>
 </body>
 
 </html>

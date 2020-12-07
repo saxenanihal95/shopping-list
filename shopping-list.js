@@ -67,6 +67,7 @@ function deleteItem(id) {
 function displayItem(value, id) {
   const div = document.createElement("div");
   div.id = `input-${id}`;
+  div.className = 'list-item';
 
   const input = document.createElement("input");
   input.value = value;
@@ -79,6 +80,7 @@ function displayItem(value, id) {
   }
 
   const editButton = document.createElement("button");
+  editButton.className="edit-button btn"
   let isEditable = false;
   editButton.textContent = isEditable ? "Done" : "Edit";
   editButton.onclick = () => {
@@ -97,6 +99,7 @@ function displayItem(value, id) {
   };
 
   const deleteButton = document.createElement("button");
+  deleteButton.className="delete-button btn"
   deleteButton.textContent = "Delete";
   deleteButton.onclick = () => {
     document.getElementById(`input-${id}`).remove();
