@@ -1,4 +1,4 @@
-# shopping-list
+# Shopping List
 Shopping list created using html, js and css
 
 Features:
