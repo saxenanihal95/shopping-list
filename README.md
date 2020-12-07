@@ -1,6 +1,8 @@
 # Shopping List
 Shopping list created using html, js and css
 
+Demo Url: https://dreamy-lamport-30af65.netlify.app/
+
 Features:
 
 * Let the user access her/his Groceries List by entering their name
